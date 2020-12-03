@@ -1,5 +1,6 @@
 package com.kimleang.blog.models.responses;
 
+import com.kimleang.blog.utils.Paging;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,6 +11,7 @@ public class Response<T> {
   private T data;
   private String message;
   private Status status;
+  private Paging paging;
 
   private enum Status {
     OK, BAD_REQUEST, UNAUTHORIZED, VALIDATION_EXCEPTION, EXCEPTION, WRONG_CREDENTIALS, ACCESS_DENIED, NOT_FOUND, DUPLICATE_ENTITY
