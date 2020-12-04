@@ -1,6 +1,7 @@
 package com.kimleang.blog.services.impl;
 
 import com.kimleang.blog.services.FileStorageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -22,10 +23,14 @@ import java.util.stream.Stream;
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
 
-  private final Path root = Paths.get("/home/kimleang/personal-blog/images/");
+  private final String serverPath;
+  private final Path root;
 
-  @Value("${file.upload.server.path}")
-  private String serverPath;
+  @Autowired
+  public FileStorageServiceImpl(@Value("${file.upload.server.path}") String serverPath) {
+    this.serverPath = serverPath;
+    this.root = Paths.get(serverPath);
+  }
 
   @Override
   public void init() {

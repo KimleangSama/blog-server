@@ -1,9 +1,7 @@
 package com.kimleang.blog.controllers.rest;
 
 import com.kimleang.blog.models.responses.FileInfoResponse;
-import com.kimleang.blog.models.responses.FileUploadResponse;
-import com.kimleang.blog.models.responses.Response;
-import com.kimleang.blog.services.impl.FileStorageServiceImpl;
+import com.kimleang.blog.services.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -30,19 +27,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("${api.version}/files")
+@RequestMapping("/files")
 public class FileUploadRestController {
-
-//  @Value(value = "${file.upload.server.path}")
-//  private String serverPath;
 
   @Value("${file.base.url}")
   private String imageUrl;
 
-  private FileStorageServiceImpl fileStorageService;
+  private FileStorageService fileStorageService;
 
   @Autowired()
-  public void setFileStorageService(FileStorageServiceImpl fileStorageService) {
+  public void setFileStorageService(FileStorageService fileStorageService) {
     this.fileStorageService = fileStorageService;
   }
 
@@ -125,7 +119,6 @@ public class FileUploadRestController {
   @GetMapping("/{filename:.+}")
   public ResponseEntity<Resource> getFile(@PathVariable String filename) {
     Resource file = fileStorageService.load(filename);
-    System.out.println(file);
     return ResponseEntity.ok()
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
   }
