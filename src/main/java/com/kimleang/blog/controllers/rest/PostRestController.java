@@ -5,26 +5,27 @@ import com.kimleang.blog.models.dtos.CategoryDto;
 import com.kimleang.blog.models.dtos.ContentDto;
 import com.kimleang.blog.models.dtos.PostDto;
 import com.kimleang.blog.models.dtos.TagDto;
-import com.kimleang.blog.models.entities.ContentEntity;
 import com.kimleang.blog.models.entities.PostEntity;
 import com.kimleang.blog.models.mappers.PostMapper;
 import com.kimleang.blog.models.requests.PostRequest;
 import com.kimleang.blog.models.responses.Response;
-import com.kimleang.blog.repositories.PostRepository;
 import com.kimleang.blog.services.PostService;
-import com.kimleang.blog.utils.SequenceGenerator;
+import com.kimleang.blog.utils.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -38,47 +39,9 @@ public class PostRestController {
     this.postService = postService;
   }
 
-  @GetMapping
-  public String index() {
-    Slugify slugify = new Slugify();
-
-
-    return "KIMLEANG";
-  }
-
   @PostMapping
   public Response<PostDto> savePost(@Valid @RequestBody PostRequest postRequest) {
-    Slugify slugify = new Slugify();
-    Set<ContentDto> contents = new HashSet<>();
-    postRequest.getContentRequests().forEach(contentRequest -> {
-      contents.add(
-          new ContentDto()
-              .setName(contentRequest.getName())
-              .setSlug(contentRequest.getName())
-      );
-    });
-    Set<TagDto> tags = new HashSet<>();
-    postRequest.getTagRequests().forEach(tagRequest -> {
-      tags.add(
-          new TagDto()
-              .setName(tagRequest.getName())
-              .setSlug(tagRequest.getName())
-      );
-    });
-    Set<CategoryDto> categories = new HashSet<>();
-    postRequest.getCategoryRequests().forEach(categoryRequest -> {
-      categories.add(
-          new CategoryDto()
-              .setName(categoryRequest.getName())
-      );
-    });
-    PostDto postDto = new PostDto()
-        .setTitle(postRequest.getTitle())
-        .setBody(postRequest.getBody())
-        .setSlug(slugify.slugify(postRequest.getTitle()))
-        .setContents(contents)
-        .setTags(tags)
-        .setCategories(categories);
+    PostDto postDto = setupPostRequest(postRequest);
     try {
       postDto = postService.createPost(postDto);
     } catch (DataIntegrityViolationException ex) {
@@ -90,7 +53,23 @@ public class PostRestController {
     return Response.<PostDto>ok("You have created a post successfully.").setData(postDto);
   }
 
-  @GetMapping("/{id}")
+  @GetMapping
+  public Response<Set<PostDto>> getAllPostsByPaging(@RequestParam int page, @RequestParam int size) {
+    try {
+      Page<PostEntity> postEntityPage = postService.findPostsByPaging(page, size);
+      Set<PostDto> posts = PostMapper.toSetOfPostsDto(postEntityPage.getContent());
+      Paging paging = new Paging()
+          .setPage(page)
+          .setSize(size)
+          .setTotalPages(postEntityPage.getTotalPages())
+          .setTotalSizes((int) postEntityPage.getTotalElements());
+      return Response.<Set<PostDto>>ok("You retrieved").setData(posts).setPaging(paging);
+    } catch (Exception ex) {
+      return Response.<Set<PostDto>>exception().setData(null).setPaging(null);
+    }
+  }
+
+  @GetMapping("/id/{id}")
   public Response<PostDto> getPostById(@PathVariable(name = "id") Long id) {
     try {
       PostDto postDto = postService.findPostById(id);
@@ -107,7 +86,7 @@ public class PostRestController {
   }
 
   @GetMapping("/{slug}")
-  public Response<PostDto> getPostById(@PathVariable(name = "slug") String slug) {
+  public Response<PostDto> getPostBySlug(@PathVariable(name = "slug") String slug) {
     try {
       PostDto postDto = postService.findPostBySlug(slug);
       if (postDto != null) {
@@ -120,6 +99,65 @@ public class PostRestController {
           .setData(null)
           .setMessage(ex.getLocalizedMessage());
     }
+  }
+
+  @PatchMapping("/update/{id}")
+  public Response<PostDto> updatePost(@Valid @RequestBody PostRequest postRequest, @PathVariable long id) {
+    PostDto postDto = setupPostRequest(postRequest);
+    try {
+      postDto = postService.updatePost(postDto, id);
+    } catch (DataIntegrityViolationException ex) {
+      return Response.<PostDto>exception()
+          .setMessage("Duplicate entry " + postDto.getSlug() + " for key slug.")
+          .setData(null)
+          .setCode(500);
+    }
+    return Response.<PostDto>ok("You have created a post successfully.").setData(postDto);
+  }
+
+  @DeleteMapping("/{id}")
+  public Response<PostDto> getPostBySlug(@PathVariable(name = "id") Long id) {
+    try {
+      PostDto postDto = postService.deletePost(id);
+      if (postDto != null) {
+        return Response.<PostDto>ok("You delete post with Id: " + id + " success.").setData(postDto);
+      } else {
+        return Response.<PostDto>notFound("You delete post with Id: " + id + " failed.").setData(null);
+      }
+    } catch (Exception ex) {
+      return Response.<PostDto>exception()
+          .setData(null)
+          .setMessage(ex.getLocalizedMessage());
+    }
+  }
+
+  private PostDto setupPostRequest(@RequestBody @Valid PostRequest postRequest) {
+    Slugify slugify = new Slugify();
+    Set<ContentDto> contents = new HashSet<>();
+    postRequest.getContentRequests().forEach(contentRequest -> contents.add(
+        new ContentDto()
+            .setName(contentRequest.getName())
+            .setSlug(contentRequest.getName())
+    ));
+    Set<TagDto> tags = new HashSet<>();
+    postRequest.getTagRequests().forEach(tagRequest -> tags.add(
+        new TagDto()
+            .setName(tagRequest.getName())
+            .setSlug(tagRequest.getName())
+    ));
+    Set<CategoryDto> categories = new HashSet<>();
+    postRequest.getCategoryRequests().forEach(categoryRequest -> categories.add(
+        new CategoryDto()
+            .setName(categoryRequest.getName())
+            .setSlug(categoryRequest.getName())
+    ));
+    return new PostDto()
+        .setTitle(postRequest.getTitle())
+        .setBody(postRequest.getBody())
+        .setSlug(slugify.slugify(postRequest.getTitle()))
+        .setContents(contents)
+        .setTags(tags)
+        .setCategories(categories);
   }
 
 }

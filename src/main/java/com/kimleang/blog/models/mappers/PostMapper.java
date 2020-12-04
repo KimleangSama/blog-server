@@ -7,7 +7,10 @@ import com.kimleang.blog.models.dtos.PostDto;
 import com.kimleang.blog.models.dtos.TagDto;
 import com.kimleang.blog.models.entities.PostEntity;
 
+import java.util.Base64;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PostMapper {
@@ -15,16 +18,20 @@ public class PostMapper {
     Slugify slugify = new Slugify();
     return new PostDto()
         .setTitle(postEntity.getTitle())
-        .setBody(postEntity.getBody())
+        .setBody(new String(Base64.getDecoder().decode(postEntity.getBody())))
         .setSlug(slugify.slugify(postEntity.getTitle()))
         .setContents(
             new HashSet<>(
                 postEntity
                     .getContents()
                     .stream()
-                    .map(content -> new ContentDto()
-                        .setName(content.getName())
-                        .setSlug(content.getSlug()))
+                    .map(content -> {
+                      if (content != null)
+                        return new ContentDto()
+                            .setName(content.getName())
+                            .setSlug(content.getSlug());
+                      else return null;
+                    })
                     .collect(Collectors.toSet())
             )
         )
@@ -58,5 +65,19 @@ public class PostMapper {
                     .collect(Collectors.toSet())
             )
         );
+  }
+
+  public static Set<PostDto> toSetOfPostsDto(Set<PostEntity> postEntities) {
+    return postEntities
+        .stream()
+        .map(PostMapper::toPostDto)
+        .collect(Collectors.toSet());
+  }
+
+  public static Set<PostDto> toSetOfPostsDto(List<PostEntity> postEntities) {
+    return postEntities
+        .stream()
+        .map(PostMapper::toPostDto)
+        .collect(Collectors.toSet());
   }
 }

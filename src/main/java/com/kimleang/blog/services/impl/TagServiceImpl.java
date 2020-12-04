@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -37,9 +38,9 @@ public class TagServiceImpl implements TagService {
 
   @Override
   public Set<TagDto> getAllTagsByPostSlug(String slug) {
-    PostEntity postEntity = postRepository.findBySlug(slug);
+    Optional<PostEntity> postEntity = postRepository.findBySlug(slug);
     System.out.println(postEntity.toString());
-    return TagMapper.toSetOfTagsDto(postEntity.getTags());
+    return TagMapper.toSetOfTagsDto(postEntity.get().getTags());
 //    return TagMapper.toSetOfTagsDto(tagRepository.findAllTagsBySlug(slug));
   }
 
