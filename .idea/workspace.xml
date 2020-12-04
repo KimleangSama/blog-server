@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cf4f82f-e2f0-4116-a2ec-9be2eb96c318" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/personal_blog_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/personal_blog_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_22.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/personal-blog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/personal-blog.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/controllers/rest/FileUploadRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/controllers/rest/FileUploadRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/exceptions/FileStorageException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/exceptions/FileUploadExceptionAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/services/impl/FileStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/services/impl/FileStorageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.properties" afterDir="false" />
-    </list>
+    <list default="true" id="2cf4f82f-e2f0-4116-a2ec-9be2eb96c318" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
