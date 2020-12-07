@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,16 @@ public class PostRestController {
           .setCode(500);
     }
     return Response.<PostDto>ok("You have created a post successfully.").setData(postDto);
+  }
+
+  @GetMapping("/all")
+  public Response<Set<PostDto>> getAllPosts() {
+    try {
+      Set<PostDto> posts = postService.findAllPosts();
+      return Response.<Set<PostDto>>ok("You retrieved").setData(posts);
+    } catch (Exception ex) {
+      return Response.<Set<PostDto>>exception().setData(null).setPaging(null);
+    }
   }
 
   @GetMapping
@@ -95,6 +106,7 @@ public class PostRestController {
         return Response.<PostDto>notFound("You get post with Slug: " + slug + " failed.").setData(null);
       }
     } catch (Exception ex) {
+      ex.printStackTrace();
       return Response.<PostDto>exception()
           .setData(null)
           .setMessage(ex.getLocalizedMessage());
@@ -131,31 +143,48 @@ public class PostRestController {
     }
   }
 
-  private PostDto setupPostRequest(@RequestBody @Valid PostRequest postRequest) {
+  @PutMapping("/{id}/published")
+  public Response<PostDto> publishedPost(@PathVariable("id") long id) {
+    try {
+      PostDto postDto = postService.publishPost(id);
+      return Response.<PostDto>ok("").setData(postDto);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      return Response.<PostDto>exception()
+          .setData(null)
+          .setMessage(ex.getLocalizedMessage());
+    }
+  }
+
+  private PostDto setupPostRequest(PostRequest postRequest) {
     Slugify slugify = new Slugify();
     Set<ContentDto> contents = new HashSet<>();
-    postRequest.getContentRequests().forEach(contentRequest -> contents.add(
-        new ContentDto()
-            .setName(contentRequest.getName())
-            .setSlug(contentRequest.getName())
-    ));
+    if (postRequest.getContentRequests() != null)
+      postRequest.getContentRequests().forEach(contentRequest -> contents.add(
+          new ContentDto()
+              .setName(contentRequest.getName())
+              .setSlug(contentRequest.getName())
+      ));
     Set<TagDto> tags = new HashSet<>();
-    postRequest.getTagRequests().forEach(tagRequest -> tags.add(
-        new TagDto()
-            .setName(tagRequest.getName())
-            .setSlug(tagRequest.getName())
-    ));
+    if (postRequest.getTagRequests() != null)
+      postRequest.getTagRequests().forEach(tagRequest -> tags.add(
+          new TagDto()
+              .setName(tagRequest.getName())
+              .setSlug(tagRequest.getName())
+      ));
     Set<CategoryDto> categories = new HashSet<>();
-    postRequest.getCategoryRequests().forEach(categoryRequest -> categories.add(
-        new CategoryDto()
-            .setName(categoryRequest.getName())
-            .setSlug(categoryRequest.getName())
-    ));
+    if (postRequest.getCategoryRequests() != null)
+      postRequest.getCategoryRequests().forEach(categoryRequest -> categories.add(
+          new CategoryDto()
+              .setName(categoryRequest.getName())
+              .setSlug(categoryRequest.getName())
+      ));
     return new PostDto()
         .setTitle(postRequest.getTitle())
         .setBody(postRequest.getBody())
         .setSlug(slugify.slugify(postRequest.getTitle()))
         .setContents(contents)
+        .setCover(postRequest.getCover())
         .setTags(tags)
         .setCategories(categories);
   }

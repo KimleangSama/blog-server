@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -84,17 +85,22 @@ public class PostServiceImpl implements PostService {
     PostEntity postEntity = new PostEntity()
         .setTitle(postDto.getTitle())
         .setBody(postDto.getBody())
-        .setSlug(postDto.getSlug())
+        .setCover(postDto.getCover())
+        .setSlug(postDto.getSlug() + "-" + SequenceGenerator.generate(5))
         .setContents(contents)
         .setCategories(categories)
         .setTags(tags);
     try {
       postEntity = postRepository.save(postEntity);
     } catch (DataIntegrityViolationException ex) {
-      postEntity.setSlug(postEntity.getSlug() + "-" + SequenceGenerator.generate(5));
-      postEntity = postRepository.save(postEntity);
+      return null;
     }
     return PostMapper.toPostDto(postEntity);
+  }
+
+  @Override
+  public Set<PostDto> findAllPosts() {
+    return PostMapper.toSetOfPostsDto(postRepository.findAll());
   }
 
   @Override
@@ -104,12 +110,14 @@ public class PostServiceImpl implements PostService {
   }
 
   @Override
+  @Transactional
   public PostDto findPostById(Long id) {
     Optional<PostEntity> postEntity = postRepository.findById(id);
     return postEntity.map(PostMapper::toPostDto).orElse(null);
   }
 
   @Override
+  @Transactional
   public PostDto findPostBySlug(String slug) {
     Optional<PostEntity> postEntity = postRepository.findBySlug(slug);
     return postEntity.map(PostMapper::toPostDto).orElse(null);
@@ -125,14 +133,14 @@ public class PostServiceImpl implements PostService {
     Set<TagEntity> tags = setupTagEntities(postDto);
 
     Optional<PostEntity> postEntity = postRepository.findById(id);
-    if(postEntity.isPresent()) {
+    if (postEntity.isPresent()) {
       PostEntity post = postEntity.get()
-        .setTitle(postDto.getTitle())
-        .setBody(postDto.getBody())
-        .setSlug(postDto.getSlug())
-        .setContents(contents)
-        .setCategories(categories)
-        .setTags(tags);
+          .setTitle(postDto.getTitle())
+          .setBody(postDto.getBody())
+          .setSlug(postDto.getSlug())
+          .setContents(contents)
+          .setCategories(categories)
+          .setTags(tags);
       try {
         post = postRepository.save(post);
       } catch (DataIntegrityViolationException ex) {
@@ -148,9 +156,21 @@ public class PostServiceImpl implements PostService {
   @Override
   public PostDto deletePost(Long id) {
     Optional<PostEntity> postEntity = postRepository.findById(id);
-    if(postEntity.isPresent()) {
+    if (postEntity.isPresent()) {
       postRepository.deleteById(id);
       return PostMapper.toPostDto(postEntity.get());
+    }
+    return null;
+  }
+
+  @Override
+  public PostDto publishPost(Long id) {
+    Optional<PostEntity> post = postRepository.findById(id);
+    if(post.isPresent()) {
+      PostEntity postEntity = post.get();
+      postEntity.setSavedDraft(false);
+      postEntity = postRepository.save(postEntity);
+      return PostMapper.toPostDto(postEntity);
     }
     return null;
   }

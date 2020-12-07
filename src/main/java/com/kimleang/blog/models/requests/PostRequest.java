@@ -1,5 +1,6 @@
 package com.kimleang.blog.models.requests;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.Set;
@@ -9,7 +10,11 @@ import java.util.Set;
 public class PostRequest {
   private String title;
   private String body;
+  private String cover;
+  @JsonProperty(value = "contents")
   private Set<ContentRequest> contentRequests;
+  @JsonProperty(value = "categories")
   private Set<CategoryRequest> categoryRequests;
+  @JsonProperty(value = "tags")
   private Set<TagRequest> tagRequests;
 }

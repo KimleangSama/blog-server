@@ -13,6 +13,7 @@ import java.util.Set;
 @Setter
 @Accessors(chain = true)
 public class TagDto {
+  private Long id;
   private String name;
   private String slug;
   @ToString.Exclude

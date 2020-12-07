@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 public class PostMapper {
   public static PostDto toPostDto(PostEntity postEntity) {
-    Slugify slugify = new Slugify();
     return new PostDto()
         .setTitle(postEntity.getTitle())
         .setBody(new String(Base64.getDecoder().decode(postEntity.getBody())))
-        .setSlug(slugify.slugify(postEntity.getTitle()))
+        .setSlug(postEntity.getSlug())
+        .setCover(postEntity.getCover())
         .setContents(
             new HashSet<>(
                 postEntity

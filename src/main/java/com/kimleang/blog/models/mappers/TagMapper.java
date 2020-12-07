@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class TagMapper {
   public static TagDto toTagDto(TagEntity tagEntity) {
     return new TagDto()
+        .setId(tagEntity.getId())
         .setName(tagEntity.getName())
         .setSlug(tagEntity.getSlug())
         .setPosts(

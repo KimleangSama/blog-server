@@ -40,6 +40,7 @@ import java.util.Set;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class PostEntity implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,8 +48,11 @@ public class PostEntity implements Serializable {
   private String title;
   private String slug;
   @Lob
-  @Column(length = 1024)
+  @Column(columnDefinition = "TEXT")
   private String body;
+  @Column(name = "cover")
+  private String cover;
+  private boolean savedDraft;
 
   @OneToMany(
       cascade = CascadeType.PERSIST

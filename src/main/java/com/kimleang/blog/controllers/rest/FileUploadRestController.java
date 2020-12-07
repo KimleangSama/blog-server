@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/files")
+@RequestMapping("${api.version}/files")
 public class FileUploadRestController {
 
   @Value("${file.base.url}")
