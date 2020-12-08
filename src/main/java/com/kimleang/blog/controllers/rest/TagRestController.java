@@ -1,6 +1,5 @@
 package com.kimleang.blog.controllers.rest;
 
-import com.kimleang.blog.models.dtos.PostDto;
 import com.kimleang.blog.models.dtos.TagDto;
 import com.kimleang.blog.models.requests.TagRequest;
 import com.kimleang.blog.models.responses.Response;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -32,8 +30,7 @@ public class TagRestController {
   @PostMapping
   public Response<TagDto> createTag(@Valid @RequestBody TagRequest tagRequest) {
     TagDto tagDto = new TagDto()
-        .setName(tagRequest.getName())
-        .setColor(randomBadgeColor());
+        .setName(tagRequest.getName());
     try {
       tagDto = tagService.createTag(tagDto);
     } catch (DataIntegrityViolationException ex) {
@@ -42,12 +39,7 @@ public class TagRestController {
           .setData(null)
           .setCode(500);
     }
-    return Response.<TagDto>ok("You have created a post successfully.").setData(tagDto);
-  }
-
-  private String randomBadgeColor() {
-    String[] colors = {"primary", "secondary", "success", "danger", "warning", "info", "light", "dark"};
-    return colors[(int)(Math.random() * colors.length)];
+    return Response.<TagDto>ok("You have created a tag successfully.").setData(tagDto);
   }
 
   @GetMapping

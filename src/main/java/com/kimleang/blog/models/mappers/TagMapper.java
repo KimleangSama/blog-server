@@ -25,8 +25,7 @@ public class TagMapper {
                         .setSlug(post.getSlug()))
                     .collect(Collectors.toSet())
             )
-        )
-        ;
+        );
   }
 
   public static Set<TagDto> toSetOfTagsDto(Set<TagEntity> tagEntities) {

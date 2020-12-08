@@ -37,9 +37,14 @@ public class TagServiceImpl implements TagService {
   public TagDto createTag(TagDto tag) {
     TagEntity tagEntity = new TagEntity()
         .setName(tag.getName())
-        .setColor(tag.getColor());
+        .setColor(randomBadgeColor());
     tagEntity = tagRepository.save(tagEntity);
     return TagMapper.toTagDto(tagEntity);
+  }
+
+  private String randomBadgeColor() {
+    String[] colors = {"primary", "secondary", "success", "danger", "warning", "info", "light", "dark"};
+    return colors[(int)(Math.random() * colors.length)];
   }
 
   @Override
