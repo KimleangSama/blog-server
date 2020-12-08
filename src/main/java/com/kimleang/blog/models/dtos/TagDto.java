@@ -15,8 +15,6 @@ import java.util.Set;
 public class TagDto {
   private Long id;
   private String name;
-  private String slug;
-  @ToString.Exclude
-  @EqualsAndHashCode.Exclude
+  private String color;
   private Set<PostDto> posts = new HashSet<>();
 }

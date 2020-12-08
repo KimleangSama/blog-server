@@ -1,8 +1,6 @@
 package com.kimleang.blog.models.mappers;
 
-import com.github.slugify.Slugify;
 import com.kimleang.blog.models.dtos.CategoryDto;
-import com.kimleang.blog.models.dtos.ContentDto;
 import com.kimleang.blog.models.dtos.PostDto;
 import com.kimleang.blog.models.dtos.TagDto;
 import com.kimleang.blog.models.entities.PostEntity;
@@ -20,21 +18,6 @@ public class PostMapper {
         .setBody(new String(Base64.getDecoder().decode(postEntity.getBody())))
         .setSlug(postEntity.getSlug())
         .setCover(postEntity.getCover())
-        .setContents(
-            new HashSet<>(
-                postEntity
-                    .getContents()
-                    .stream()
-                    .map(content -> {
-                      if (content != null)
-                        return new ContentDto()
-                            .setName(content.getName())
-                            .setSlug(content.getSlug());
-                      else return null;
-                    })
-                    .collect(Collectors.toSet())
-            )
-        )
         .setTags(
             new HashSet<>(
                 postEntity
@@ -44,7 +27,7 @@ public class PostMapper {
                       if (tag != null)
                         return new TagDto()
                             .setName(tag.getName())
-                            .setSlug(tag.getSlug());
+                            .setColor(tag.getColor());
                       else return null;
                     })
                     .collect(Collectors.toSet())
@@ -59,7 +42,7 @@ public class PostMapper {
                       if (category != null)
                         return new CategoryDto()
                             .setName(category.getName())
-                            .setSlug(category.getSlug());
+                            .setColor(category.getColor());
                       else return null;
                     })
                     .collect(Collectors.toSet())

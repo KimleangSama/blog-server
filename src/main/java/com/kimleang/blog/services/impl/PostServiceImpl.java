@@ -1,14 +1,11 @@
 package com.kimleang.blog.services.impl;
 
-import com.github.slugify.Slugify;
 import com.kimleang.blog.models.dtos.PostDto;
 import com.kimleang.blog.models.entities.CategoryEntity;
-import com.kimleang.blog.models.entities.ContentEntity;
 import com.kimleang.blog.models.entities.PostEntity;
 import com.kimleang.blog.models.entities.TagEntity;
 import com.kimleang.blog.models.mappers.PostMapper;
 import com.kimleang.blog.repositories.CategoryRepository;
-import com.kimleang.blog.repositories.ContentRepository;
 import com.kimleang.blog.repositories.PostRepository;
 import com.kimleang.blog.repositories.TagRepository;
 import com.kimleang.blog.services.PostService;
@@ -31,7 +28,6 @@ public class PostServiceImpl implements PostService {
   private PostRepository postRepository;
   private CategoryRepository categoryRepository;
   private TagRepository tagRepository;
-  private ContentRepository contentRepository;
 
   @Autowired
   public void setPostRepository(PostRepository postRepository) {
@@ -46,11 +42,6 @@ public class PostServiceImpl implements PostService {
   @Autowired
   public void setCategoryRepository(CategoryRepository categoryRepository) {
     this.categoryRepository = categoryRepository;
-  }
-
-  @Autowired
-  public void setContentRepository(ContentRepository contentRepository) {
-    this.contentRepository = contentRepository;
   }
 
   private Set<CategoryEntity> setupCategoryEntities(PostDto postDto) {
@@ -71,14 +62,6 @@ public class PostServiceImpl implements PostService {
 
   @Override
   public PostDto createPost(PostDto postDto) {
-    Set<ContentEntity> contents = new HashSet<>();
-    postDto.getContents().forEach(content -> {
-      contents.add(
-          new ContentEntity()
-              .setName(content.getName())
-              .setSlug(new Slugify().slugify(content.getName()))
-      );
-    });
     Set<CategoryEntity> categories = setupCategoryEntities(postDto);
     Set<TagEntity> tags = setupTagEntities(postDto);
 
@@ -87,7 +70,6 @@ public class PostServiceImpl implements PostService {
         .setBody(postDto.getBody())
         .setCover(postDto.getCover())
         .setSlug(postDto.getSlug() + "-" + SequenceGenerator.generate(5))
-        .setContents(contents)
         .setCategories(categories)
         .setTags(tags);
     try {
@@ -125,11 +107,7 @@ public class PostServiceImpl implements PostService {
 
   @Override
   public PostDto updatePost(PostDto postDto, Long id) {
-    Set<ContentEntity> contents = new HashSet<>();
-    postDto.getContents().forEach(content -> contents.add(contentRepository.findByName(content.getName())));
-
     Set<CategoryEntity> categories = setupCategoryEntities(postDto);
-
     Set<TagEntity> tags = setupTagEntities(postDto);
 
     Optional<PostEntity> postEntity = postRepository.findById(id);
@@ -138,7 +116,6 @@ public class PostServiceImpl implements PostService {
           .setTitle(postDto.getTitle())
           .setBody(postDto.getBody())
           .setSlug(postDto.getSlug())
-          .setContents(contents)
           .setCategories(categories)
           .setTags(tags);
       try {

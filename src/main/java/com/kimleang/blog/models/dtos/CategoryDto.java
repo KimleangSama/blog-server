@@ -10,5 +10,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CategoryDto {
   private String name;
-  private String slug;
+  private String color;
 }

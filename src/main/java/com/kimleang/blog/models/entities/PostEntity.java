@@ -54,12 +54,6 @@ public class PostEntity implements Serializable {
   private String cover;
   private boolean savedDraft;
 
-  @OneToMany(
-      cascade = CascadeType.PERSIST
-  )
-  @JoinColumn(name = "fk_content")
-  private Set<ContentEntity> contents = new HashSet<>();
-
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
   @JoinTable(
       name = "posts_tags",

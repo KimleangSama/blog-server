@@ -2,7 +2,6 @@ package com.kimleang.blog.controllers.rest;
 
 import com.github.slugify.Slugify;
 import com.kimleang.blog.models.dtos.CategoryDto;
-import com.kimleang.blog.models.dtos.ContentDto;
 import com.kimleang.blog.models.dtos.PostDto;
 import com.kimleang.blog.models.dtos.TagDto;
 import com.kimleang.blog.models.entities.PostEntity;
@@ -158,32 +157,22 @@ public class PostRestController {
 
   private PostDto setupPostRequest(PostRequest postRequest) {
     Slugify slugify = new Slugify();
-    Set<ContentDto> contents = new HashSet<>();
-    if (postRequest.getContentRequests() != null)
-      postRequest.getContentRequests().forEach(contentRequest -> contents.add(
-          new ContentDto()
-              .setName(contentRequest.getName())
-              .setSlug(contentRequest.getName())
-      ));
     Set<TagDto> tags = new HashSet<>();
     if (postRequest.getTagRequests() != null)
       postRequest.getTagRequests().forEach(tagRequest -> tags.add(
           new TagDto()
               .setName(tagRequest.getName())
-              .setSlug(tagRequest.getName())
       ));
     Set<CategoryDto> categories = new HashSet<>();
     if (postRequest.getCategoryRequests() != null)
       postRequest.getCategoryRequests().forEach(categoryRequest -> categories.add(
           new CategoryDto()
               .setName(categoryRequest.getName())
-              .setSlug(categoryRequest.getName())
       ));
     return new PostDto()
         .setTitle(postRequest.getTitle())
         .setBody(postRequest.getBody())
         .setSlug(slugify.slugify(postRequest.getTitle()))
-        .setContents(contents)
         .setCover(postRequest.getCover())
         .setTags(tags)
         .setCategories(categories);

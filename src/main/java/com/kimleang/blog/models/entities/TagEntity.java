@@ -22,8 +22,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tags", uniqueConstraints = {
     @UniqueConstraint(columnNames = {
-        "name",
-        "slug"
+        "name"
     })
 })
 @Getter
@@ -38,7 +37,7 @@ public class TagEntity implements Serializable {
   private Long id;
 
   private String name;
-  private String slug;
+  private String color;
 
   @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
   private Set<PostEntity> posts = new HashSet<>();

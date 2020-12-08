@@ -37,7 +37,7 @@ public class TagServiceImpl implements TagService {
   public TagDto createTag(TagDto tag) {
     TagEntity tagEntity = new TagEntity()
         .setName(tag.getName())
-        .setSlug(tag.getName() + "-" + SequenceGenerator.generate(5));
+        .setColor(tag.getColor());
     tagEntity = tagRepository.save(tagEntity);
     return TagMapper.toTagDto(tagEntity);
   }

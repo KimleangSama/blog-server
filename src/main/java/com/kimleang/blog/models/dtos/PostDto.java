@@ -12,12 +12,12 @@ import java.util.Set;
 @Accessors(chain = true)
 public class PostDto {
 
+  private Long id;
   private String title;
   private String slug;
   private String body;
   private String cover;
   private boolean savedDraft;
-  private Set<ContentDto> contents = new HashSet<>();
   private Set<TagDto> tags = new HashSet<>();
   private Set<CategoryDto> categories = new HashSet<>();
 

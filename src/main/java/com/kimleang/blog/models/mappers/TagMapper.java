@@ -13,7 +13,7 @@ public class TagMapper {
     return new TagDto()
         .setId(tagEntity.getId())
         .setName(tagEntity.getName())
-        .setSlug(tagEntity.getSlug())
+        .setColor(tagEntity.getColor())
         .setPosts(
             new HashSet<>(
                 tagEntity

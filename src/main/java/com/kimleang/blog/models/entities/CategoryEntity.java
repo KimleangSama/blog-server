@@ -20,8 +20,7 @@ import java.util.Set;
 @Entity
 @Table(name = "categories", uniqueConstraints = {
     @UniqueConstraint(columnNames = {
-        "name",
-        "slug"
+        "name"
     })
 })
 @Data
@@ -35,7 +34,7 @@ public class CategoryEntity implements Serializable {
   private Long id;
 
   private String name;
-  private String slug;
+  private String color;
 
   @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
   private Set<PostEntity> posts = new HashSet<>();

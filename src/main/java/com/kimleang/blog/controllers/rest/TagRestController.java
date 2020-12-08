@@ -33,16 +33,21 @@ public class TagRestController {
   public Response<TagDto> createTag(@Valid @RequestBody TagRequest tagRequest) {
     TagDto tagDto = new TagDto()
         .setName(tagRequest.getName())
-        .setSlug(tagRequest.getName());
+        .setColor(randomBadgeColor());
     try {
       tagDto = tagService.createTag(tagDto);
     } catch (DataIntegrityViolationException ex) {
       return Response.<TagDto>exception()
-          .setMessage("Duplicate entry " + tagDto.getSlug() + " for key slug.")
+          .setMessage("Duplicate entry " + tagDto.getName() + " for key name.")
           .setData(null)
           .setCode(500);
     }
     return Response.<TagDto>ok("You have created a post successfully.").setData(tagDto);
+  }
+
+  private String randomBadgeColor() {
+    String[] colors = {"primary", "secondary", "success", "danger", "warning", "info", "light", "dark"};
+    return colors[(int)(Math.random() * colors.length)];
   }
 
   @GetMapping
