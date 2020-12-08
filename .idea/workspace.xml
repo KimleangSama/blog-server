@@ -6,16 +6,57 @@
   <component name="ChangeListManager">
     <list default="true" id="2cf4f82f-e2f0-4116-a2ec-9be2eb96c318" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/controllers/rest/CategoryRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/controllers/rest/CategoryRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/controllers/rest/ContentRestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/controllers/rest/TagRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/controllers/rest/TagRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/dtos/CategoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/dtos/CategoryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/entities/TagEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/entities/TagEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/mappers/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/mappers/CategoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/mappers/TagMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/mappers/TagMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/requests/ContentRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/models/responses/FileUploadResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/services/impl/TagServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kimleang/blog/services/impl/TagServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/0fff9f05-7661-441e-ad80-e37102cd50bc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/12a941ba-78c3-45dc-9368-5690c0f098e8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/1e395de8-477b-456b-bf21-6764703194a9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/22417386-3d72-40b6-935c-bf7b85f6785f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/2473e075-53aa-4be2-a29c-107ffa8eaa18.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/25c9369b-0732-47b0-a150-6d1fd8804dd4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/32e08b81-0f48-4014-954f-2d787ab8f484.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/33289f17-c3a3-45a9-a63d-25aea101c7a9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/3ec82b10-eacf-4bd3-b72c-49f1c76ff261.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/3fb5f44c-5b89-4169-917e-2c5c3d32fca9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/488b4e15-d0b3-4447-a0c7-12260991a53b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/4a9d5ada-0f13-4baf-be72-90aea42545ee.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/4b35c956-9902-41c5-836f-8e53038daa5e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/4d2ab172-a20d-4bf1-9c43-45f3f897dd57.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/52d67895-ed75-4569-8ed4-6b65fa7b1646.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/52da85c6-5772-4dff-9cc8-a0366fa19065.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/53599a75-8edd-431d-b435-a27dca9ccd20.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/585bed5c-75a2-46fa-9a48-9975e4fbee7a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/5a0a1b3e-a1a0-41b7-9ae6-57eae7a108c8.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/5aece83c-925b-439c-97f1-2e8c48202845.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/5e4d786e-a1b8-4b00-b661-14d44b334938.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/5ed6d91f-425e-46ba-880a-e7c030a5eba6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/6101dc68-9d0f-410d-9bb3-123f1f25ffb6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/616d71f5-4351-43a9-b9da-301b0f8999ac.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/686e91f6-3f8e-491e-9692-454f20867c5c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/6e25b30d-7a05-4a83-bbf2-a60aad0d9873.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/77d8475b-d358-4baa-9315-1968c8ae69df.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/7abdeab1-c144-43fa-afb3-080f45d1744e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/81672bfd-2de2-4af5-ba47-7b2dba62fa7c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/9fe82cea-e0d1-4f13-b57b-25cdf14e036a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/a0d0b92c-0263-4a34-8aec-3cb53ca764c5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/b621d4b5-075d-4ad9-a7d9-03814eea8dc6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/b6d5b059-7f93-4bf8-ad4b-bfd0e1b1da5b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/b93272b8-c372-480d-b6ba-fb3407dcf7c4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/bb88c75d-1193-4ba8-baff-970e39f5344b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/bb8d774c-2ba3-4e93-a98f-a0c8a075fe85.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/bf8d37e3-5e2e-479e-b0e7-55cf36d64abc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/c05f0b3a-15a7-4899-8841-87657e37aa1e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/cb1c29ea-8f8c-4088-816a-ed1f6a2412e2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/cc1da3ec-db55-4653-9922-273f69f6eda4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/d5ad4c81-3d33-472d-9916-769086789187.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/db299cb9-ec53-4bc5-ac1c-099c29785c21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/dc40baa3-324e-4273-8754-eb56c0a97a05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/df26b7fb-2244-4223-9a6f-7fabbfe5d2f2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/e0342023-2bcf-4257-b4c7-7dc0512d2f23.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/ecf08078-36a7-4078-9128-a3e96929940b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/f49fde71-6b16-4187-a5dd-e155e3fefdf7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/f4d37939-0771-4b81-80aa-8f40d186a5b6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/f8870b40-15f6-47de-a7ec-2a967a7e102d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/fe05aef8-938c-42ea-aa65-bc43a8b2ccdc.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,17 +141,6 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BlogApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="personal-blog" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.kimleang.blog.BlogApplication" />
@@ -144,7 +174,8 @@
       <workItem from="1607243664569" duration="5202000" />
       <workItem from="1607345488211" duration="1556000" />
       <workItem from="1607389217645" duration="1213000" />
-      <workItem from="1607390529483" duration="1964000" />
+      <workItem from="1607390529483" duration="1999000" />
+      <workItem from="1607394711138" duration="184000" />
     </task>
     <servers />
   </component>
@@ -166,10 +197,10 @@
     </state>
     <state x="2213" y="245" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1607393032802" />
     <state x="580" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1607246332160" />
-    <state x="2088" y="280" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607326890363">
+    <state x="2088" y="280" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1607394722174">
       <screen x="1440" y="0" width="1920" height="1080" />
     </state>
-    <state x="2088" y="280" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1607326890363" />
+    <state x="2088" y="280" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1607394722174" />
     <state x="1873" y="90" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1607044664816">
       <screen x="1440" y="0" width="1920" height="1080" />
     </state>
