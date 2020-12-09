@@ -11,8 +11,6 @@ public class PostRequest {
   private String title;
   private String body;
   private String cover;
-  @JsonProperty(value = "contents")
-  private Set<ContentRequest> contentRequests;
   @JsonProperty(value = "categories")
   private Set<CategoryRequest> categoryRequests;
   @JsonProperty(value = "tags")

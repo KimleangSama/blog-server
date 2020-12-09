@@ -18,6 +18,8 @@ public class PostMapper {
         .setBody(new String(Base64.getDecoder().decode(postEntity.getBody())))
         .setSlug(postEntity.getSlug())
         .setCover(postEntity.getCover())
+        .setCreatedAt(postEntity.getCreatedAt())
+        .setUpdatedAt(postEntity.getUpdatedAt())
         .setTags(
             new HashSet<>(
                 postEntity
