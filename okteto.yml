@@ -1,0 +1,10 @@
+name: personal-blog
+image: okteto/maven
+command: ["mvn", "spring-boot:run" ]
+workdir: /app
+environment:
+  - POSTGRES_USERNAME=personal
+  - POSTGRES_DATABASE=blog
+  - POSTGRES_PASSWORD=personal
+forward:
+  - 8080:8080
